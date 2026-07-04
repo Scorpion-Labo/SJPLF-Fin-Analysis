@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SJPLF Strategic Financial Analysis &amp; Risk Assessment</title>
+<meta name="description" content="An independent strategic financial analysis and risk assessment of the San José Public Library Foundation (FY2020–FY2024), prepared by Sorphoan (Jack) Ear." />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+  :root{
+    --indigo:#4f46e5; --violet:#7c3aed; --purple:#8b5cf6; --pink:#ec4899;
+    --teal:#06b6d4; --blue:#3b82f6; --emerald:#10b981; --amber:#f59e0b; --red:#ef4444;
+    --ink:#0f172a; --slate:#475569; --mute:#64748b; --line:#e2e8f0; --bg:#f7f8fc; --card:#ffffff;
+    --grad:linear-gradient(120deg,#4f46e5 0%,#7c3aed 45%,#ec4899 100%);
+    --grad-soft:linear-gradient(120deg,#eef2ff 0%,#faf5ff 50%,#fdf2f8 100%);
+    --shadow:0 10px 30px -12px rgba(30,27,75,.25);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:transparent;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{line-height:1.2;margin:0 0 .4em}
+  p{margin:0 0 1em}
+  a{color:var(--indigo);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* progress + nav */
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--grad);z-index:60;transition:width .1s linear}
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+  .brand{font-weight:800;font-size:.95rem;letter-spacing:-.01em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  .navlinks{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .navlinks a{font-size:.78rem;font-weight:600;color:var(--slate);padding:6px 10px;border-radius:999px;transition:.2s}
+  .navlinks a:hover{background:var(--grad-soft);color:var(--indigo)}
+  @media(max-width:820px){.navlinks{display:none}}
+
+  /* hero */
+  header.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(1200px 600px at 15% -10%,#8b5cf6 0%,transparent 55%),radial-gradient(1000px 600px at 110% 20%,#ec4899 0%,transparent 50%),linear-gradient(135deg,#312e81 0%,#4f46e5 55%,#7c3aed 100%)}
+  header.hero .wrap{padding:82px 22px 90px}
+  .eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:7px 14px;border-radius:999px;margin-bottom:20px}
+  header.hero h1{font-size:clamp(1.9rem,4.6vw,3.2rem);font-weight:800;letter-spacing:-.02em;max-width:16ch}
+  header.hero .sub{font-size:1.05rem;opacity:.92;max-width:60ch;margin-top:10px}
+  .prepared{margin-top:26px;display:inline-flex;flex-direction:column;gap:2px;padding:14px 20px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)}
+  .prepared b{font-size:1rem}
+  .prepared span{font-size:.82rem;opacity:.85}
+  .scrollcue{margin-top:34px;font-size:.8rem;opacity:.8;display:flex;align-items:center;gap:8px}
+  .scrollcue .dot{width:22px;height:34px;border:2px solid rgba(255,255,255,.6);border-radius:12px;position:relative}
+  .scrollcue .dot::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:7px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:scr 1.5s infinite}
+  @keyframes scr{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+  /* key stats */
+  .stats{background:#fff;border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:30px 22px}
+  .stat{text-align:center}
+  .stat .num{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .lbl{font-size:.78rem;color:var(--mute);font-weight:600;margin-top:2px}
+  @media(max-width:640px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+
+  /* sections */
+  section{padding:66px 0}
+  section:nth-of-type(even){background:linear-gradient(120deg,rgba(238,242,255,.72),rgba(250,245,255,.72),rgba(253,242,248,.72))}
+  .kicker{font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--violet)}
+  h2.sec{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:800;letter-spacing:-.02em;margin-top:6px}
+  .lead{font-size:1.06rem;color:var(--slate);max-width:72ch}
+
+  /* cards / callouts */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow)}
+  .disclaimer{border-left:6px solid var(--amber);background:#fffbeb;border-radius:12px;padding:16px 20px;color:#7c5c05;font-size:.92rem;margin-top:24px}
+  .exec{border-top:6px solid transparent;border-image:var(--grad) 1;background:#fff}
+  .note{font-size:.86rem;color:var(--mute)}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px}
+
+  /* charts */
+  .chart-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 20px 12px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .chart-card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--grad)}
+  .chart-title{font-weight:700;font-size:1rem;margin-bottom:2px}
+  .chart-sub{font-size:.82rem;color:var(--mute);margin-bottom:12px}
+  .chart-wrap{position:relative;height:300px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:800px){.grid2{grid-template-columns:1fr}}
+
+  /* findings */
+  .finding{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center;margin-top:26px}
+  .finding.rev{grid-template-columns:1fr 1.1fr}
+  .finding.rev .txt{order:2}
+  @media(max-width:820px){.finding,.finding.rev{grid-template-columns:1fr}.finding.rev .txt{order:0}}
+  .ftag{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .ftag.risk{color:var(--red)} .ftag.good{color:var(--emerald)} .ftag.neutral{color:var(--violet)}
+  .finding h3{font-size:1.22rem;margin-top:4px}
+  .risk{margin-top:14px;padding:11px 15px;border-left:4px solid var(--rc);background:var(--rb);border-radius:0 10px 10px 0;font-size:.92rem;color:#334155;line-height:1.5}
+  .risk .rl{font-weight:800;color:var(--rc);margin-right:4px}
+  .risk .sev{display:inline-block;margin-left:6px;font-weight:800;font-size:.68rem;letter-spacing:.02em;padding:3px 10px;border-radius:999px;background:var(--rc);color:#fff;white-space:nowrap;vertical-align:middle}
+  .risk-high{--rc:#dc2626;--rb:#fef2f2}
+  .risk-medhigh{--rc:#ea580c;--rb:#fff7ed}
+  .risk-med{--rc:#d97706;--rb:#fffbeb}
+  .risk-low{--rc:#64748b;--rb:#f8fafc}
+
+  /* tables */
+  .tbl-scroll{overflow-x:auto;border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line);margin-top:22px;background:#fff}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+  thead th{background:linear-gradient(120deg,#4f46e5,#7c3aed);color:#fff;text-align:left;padding:13px 15px;font-weight:700;font-size:.82rem}
+  tbody td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}
+  tbody tr:nth-child(even){background:#faf9ff}
+  td .metric{font-weight:700}
+  td .formula{display:block;font-size:.78rem;color:var(--mute);margin-top:4px;font-style:italic}
+  .lensrow td{background:linear-gradient(120deg,#eef2ff,#faf5ff)!important;font-weight:800;color:var(--indigo);font-size:.8rem;letter-spacing:.03em;text-transform:uppercase}
+  .status{display:inline-block;font-weight:800;font-size:.76rem;padding:4px 12px;border-radius:999px;white-space:nowrap}
+  .s-healthy{background:#dcfce7;color:#15803d}
+  .s-watch{background:#fef3c7;color:#b45309}
+  .s-risk{background:#fee2e2;color:#b91c1c}
+  .num-em{font-weight:800}
+
+  ul.clean{list-style:none;padding:0;margin:16px 0}
+  ul.clean li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dashed var(--line)}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:16px;width:10px;height:10px;border-radius:3px;background:var(--grad)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1.05s ease,transform 1.05s ease}
+  .reveal.visible{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.scrollcue .dot::after{animation:none}}
+
+  footer{background:linear-gradient(135deg,#1e1b4b,#312e81);color:#c7d2fe;padding:52px 0 40px;font-size:.9rem}
+  footer h3{color:#fff;font-size:1.1rem}
+  footer .src{font-size:.78rem;color:#a5b4fc;margin-top:14px;line-height:1.7}
+  footer a{color:#e9d5ff}
+  .madeby{margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:.82rem;color:#a5b4fc}
+
+  .to-top{position:fixed;left:50%;bottom:24px;width:50px;height:50px;border:none;border-radius:50%;background:var(--grad);color:#fff;cursor:pointer;box-shadow:0 10px 24px -6px rgba(79,70,229,.6);opacity:0;visibility:hidden;transform:translate(-50%,14px);transition:opacity .35s ease,transform .35s ease,box-shadow .2s ease;z-index:70;display:flex;align-items:center;justify-content:center}
+  .to-top.show{opacity:1;visibility:visible;transform:translateX(-50%)}
+  .to-top:hover{transform:translate(-50%,-3px);box-shadow:0 14px 30px -6px rgba(236,72,153,.7)}
+  .to-top svg{display:block}
+  @media(prefers-reduced-motion:reduce){.to-top{transition:opacity .2s ease}}
+
+  /* floating books */
+  .books{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .books-hero{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  header.hero .wrap{position:relative;z-index:1}
+  .book{position:absolute;bottom:-12vh;line-height:0;animation:bookfloat var(--d,28s) linear infinite}
+  .book svg{width:var(--s,34px);height:var(--s,34px);display:block}
+  .books .book{color:#7c3aed;opacity:.09}
+  .books-hero .book{color:#fff;opacity:.16}
+  @keyframes bookfloat{0%{transform:translateY(0) rotate(-8deg)}100%{transform:translateY(-125vh) rotate(18deg)}}
+  @media(prefers-reduced-motion:reduce){.book{animation:none}.books,.books-hero{display:none}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="books" id="pageBooks" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">SJPLF · Financial Analysis</div>
+    <div class="navlinks">
+      <a href="#summary">Summary</a>
+      <a href="#overview">Overview</a>
+      <a href="#findings">Findings &amp; Risks</a>
+      <a href="#recs">Mitigation</a>
+      <a href="#measure">KPIs</a>
+      <a href="#revenue">Revenue Innovation</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="books-hero" id="heroBooks" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="eyebrow">Independent Analysis · FY2020–FY2024</span>
+    <h1>SJPLF Strategic Financial Analysis &amp; Risk Assessment</h1>
+    <p class="sub">A five-year review of the San José Public Library Foundation's audited financial statements FY2020–FY2024 (Chavan &amp; Associates, LLP) — the risks beneath the numbers, and the opportunities ahead.</p>
+    <div class="prepared">
+      <b>Prepared by Sorphoan (Jack) Ear</b>
+      <span>Finance Director candidate · July 4, 2026</span>
+    </div>
+    <div class="scrollcue"><span class="dot"></span> Scroll to explore</div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="num" data-count="61" data-suffix="%">0%</div><div class="lbl">City share of 2024 revenue</div></div>
+    <div class="stat"><div class="num" data-count="-65" data-suffix="%">0%</div><div class="lbl">Private giving since 2021</div></div>
+    <div class="stat"><div class="num" data-count="2" data-prefix="~" data-suffix="%">0%</div><div class="lbl">Endowment share of net assets</div></div>
+    <div class="stat"><div class="num" data-count="89" data-suffix="%">0%</div><div class="lbl">Spending reaching programs</div></div>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<section id="summary">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Section 1</div>
+      <h2 class="sec">Executive Summary</h2>
+    </div>
+    <div class="card exec reveal" style="margin-top:20px">
+      <p>The San José Public Library Foundation is a well-run, audit-clean organization with one serious structural vulnerability: <b>revenue concentration.</b> Across FY2020–FY2024, contributions and grants supplied roughly 90%+ of revenue every year, and the City of San José alone ranged from 20% to 71% of total revenue — leaving the Foundation dependent on a single funder.</p>
+      <p>Three trends compound that exposure: private (non-City) giving has fallen about 65% since 2021 ($4.7M → $1.7M), the unrestricted operating cushion has stayed essentially flat near $1M while the organization grew, and the endowment remains negligible at ~2% of net assets.</p>
+      <p style="margin-bottom:0">The large FY2024 net-asset decline ($15.7M → $8.6M) is <b>not a loss</b> — it is the planned deployment of restricted City grants received in 2022. The strategic priority is therefore diversification and resilience: growing unrestricted reserves toward a 3–6 month policy, rebuilding private and multi-year revenue, and launching endowment growth — all consistent with the Foundation's stated value of Sustainability and its existing Epilogue Society planned-giving program.</p>
+    </div>
+    <div class="disclaimer reveal"><b>Data limitation.</b> This analysis relies solely on audited financial statements through FY2024 (year ended December 31, 2024). FY2025 audited results were not available at the time of writing, so the figures, ratios, and trends here reflect the position through 2024 and may not represent the Foundation's current financial situation. Any live discussion should confirm the most recent numbers.</div>
+    <p class="note reveal" style="margin-top:16px"><b>Verified context (sjplf.org):</b> mission — an educated, equitable, empowered, and engaged community; program framework — Educate, Engage, Empower; core value of Sustainability (financial continuity and fiscal responsibility); and an active planned-giving program, the Epilogue Society.</p>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section id="overview">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Section 2</div>
+      <h2 class="sec">Five-Year Financial Overview</h2>
+      <p class="lead">Every figure is drawn from the audited statements and reconciles across the balance sheets, statements of activities, liquidity notes, and concentration notes.</p>
+    </div>
+    <div class="tbl-scroll reveal">
+      <table>
+        <thead><tr><th>Metric (audited)</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th></tr></thead>
+        <tbody>
+          <tr><td>Total revenue &amp; support</td><td>$5.46M</td><td>$7.30M</td><td>$12.09M</td><td>$6.38M</td><td>$5.96M</td></tr>
+          <tr><td>Total expenses</td><td>$2.95M</td><td>$3.56M</td><td>$5.63M</td><td>$6.43M</td><td>$13.04M</td></tr>
+          <tr><td>Change in net assets</td><td>+$2.51M</td><td>+$3.74M</td><td>+$6.46M</td><td>-$0.05M</td><td>-$7.08M</td></tr>
+          <tr><td>Total net assets (year-end)</td><td>$5.54M</td><td>$9.28M</td><td>$15.74M</td><td>$15.69M</td><td>$8.61M</td></tr>
+          <tr><td>&nbsp;&nbsp;Without donor restrictions</td><td>$1.28M</td><td>$1.45M</td><td>$0.94M</td><td>$1.20M</td><td>$1.10M</td></tr>
+          <tr><td>&nbsp;&nbsp;With donor restrictions</td><td>$4.26M</td><td>$7.83M</td><td>$14.80M</td><td>$14.49M</td><td>$7.51M</td></tr>
+          <tr><td>Board-designated reserve</td><td>$0.49M</td><td>$0.79M</td><td>$0.67M</td><td>$0.78M</td><td>$0.84M</td></tr>
+          <tr><td>Unrestricted liquidity (avail.)</td><td>$2.49M</td><td>~$1.2M</td><td>$0.91M</td><td>$1.16M</td><td>$1.01M</td></tr>
+          <tr><td>City of San José grants</td><td>$1.10M</td><td>$2.21M</td><td>$8.54M</td><td>$2.63M</td><td>$3.66M</td></tr>
+          <tr><td>&nbsp;&nbsp;City as % of revenue</td><td>20%</td><td>30%</td><td>71%</td><td>41%</td><td>61%</td></tr>
+          <tr><td>Private donations &amp; misc grants</td><td>$3.90M</td><td>$4.71M</td><td>$3.91M</td><td>$3.00M</td><td>$1.66M</td></tr>
+          <tr><td>Endowment (perpetual)</td><td>$0.11M</td><td>$0.21M</td><td>$0.17M</td><td>$0.19M</td><td>$0.21M</td></tr>
+          <tr><td>Program expense ratio</td><td>86%</td><td>86%</td><td>80%</td><td>82%</td><td>89%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2 reveal" style="margin-top:26px">
+      <div class="chart-card"><div class="chart-title">Revenue vs. Expenses</div><div class="chart-sub">2024 expenses exceed revenue by design — planned deployment</div><div class="chart-wrap"><canvas data-chart="revexp"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Net Assets: the swing is restricted funds</div><div class="chart-sub">$15.7M → $8.6M reflects restricted spend-down, not a loss</div><div class="chart-wrap"><canvas data-chart="netassets"></canvas></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section id="findings">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Section 3</div>
+      <h2 class="sec">Key Findings &amp; Risks</h2>
+      <p class="lead">Six findings from five years of audited data — each with the risk it creates, rated by severity and trend.</p>
+    </div>
+
+    <div class="finding reveal">
+      <div class="txt">
+        <div class="ftag good">Finding 1 · Reassurance</div>
+        <h3>The 2024 swing is planned, not distress</h3>
+        <p>Net assets rose to $15.7M by end-2022 and fell to $8.6M by end-2024 — but that isn't a loss. In 2022 the Foundation booked an $8.5M City grant restricted for multi-year education programs. In 2024 it released $11.66M from restrictions and spent $13.04M, deploying that money into programs as intended. The $7.08M "decrease" is the spend-down of previously-received restricted funds, and net assets landed back near their 2021 level.</p>
+        <div class="risk risk-low"><span class="rl">Risk:</span> Board or funders could misread the planned 2024 spend-down as an operating loss — a reporting-optics issue, not a solvency one. <span class="sev">Low · communication · one-time</span></div>
+      </div>
+      <div class="chart-card"><div class="chart-title">Net assets by restriction</div><div class="chart-sub">Restricted funds drive the swing</div><div class="chart-wrap"><canvas data-chart="netassets2"></canvas></div></div>
+    </div>
+
+    <div class="finding rev reveal">
+      <div class="txt">
+        <div class="ftag risk">Finding 2 · Top risk</div>
+        <h3>Revenue is dangerously concentrated in one funder</h3>
+        <p>The City of San José swung from 20% → 30% → 71% → 41% → 61% of total revenue. With private giving, contributions and grants are ~90%+ of revenue every year, with almost no earned or diversified income. Critically, this City funding is discretionary — it flows through annual appropriations and program MOUs (such as SJ Learns, ~$1M/year since 2015), not a guaranteed obligation, and San José's voter-approved library parcel tax funds the Library department, not the Foundation. If a City contract is cut, delayed, or not renewed, both the restricted program revenue and the up-to-15% administrative fee that funds operations shrink together.</p>
+        <div class="risk risk-high"><span class="rl">Risk:</span> A cut, delay, or non-renewal of the City's discretionary, annually-appropriated grants would strike programs and the admin-fee revenue that funds operations at the same time. <span class="sev">High · persistent</span></div>
+      </div>
+      <div class="chart-card"><div class="chart-title">City of San José = single biggest risk</div><div class="chart-sub">Share of total revenue, with a 40% comfort ceiling</div><div class="chart-wrap"><canvas data-chart="concentration"></canvas></div></div>
+    </div>
+
+    <div class="finding reveal">
+      <div class="txt">
+        <div class="ftag risk">Finding 3 · Diversification</div>
+        <h3>Private (non-City) giving is falling fast</h3>
+        <p>Donations and miscellaneous grants dropped from $4.71M (2021) to $1.66M (2024) — down about 65% in three years. That is the diversification engine running in reverse: the very base that would cushion a City cut is shrinking.</p>
+        <div class="risk risk-high"><span class="rl">Risk:</span> The diversified base that would cushion a City cut is eroding year over year. <span class="sev">High · worsening ↑</span></div>
+      </div>
+      <div class="chart-card"><div class="chart-title">Private giving down ~65% in 3 years</div><div class="chart-sub">Non-City donations &amp; misc grants ($M)</div><div class="chart-wrap"><canvas data-chart="private"></canvas></div></div>
+    </div>
+
+    <div class="finding rev reveal">
+      <div class="txt">
+        <div class="ftag risk">Finding 4 · Resilience</div>
+        <h3>The unrestricted cushion is thin and flat</h3>
+        <p>Unrestricted liquidity has hovered around $0.9M–$1.2M since 2021, and the board reserve (~$0.5M–$0.85M) has stayed essentially flat for five years while the organization grew. Against lumpy, largely-restricted cash flows, that buffer is thin — and in a nonprofit, staff can't be cut overnight if a grant slips.</p>
+        <div class="risk risk-medhigh"><span class="rl">Risk:</span> Too little unrestricted buffer to absorb a grant delay or a sudden shock without disrupting programs or staff. <span class="sev">Medium–High · flat →</span></div>
+      </div>
+      <div class="chart-card"><div class="chart-title">Cushion is thin and flat (~$1M)</div><div class="chart-sub">Board reserve vs. unrestricted liquidity ($M)</div><div class="chart-wrap"><canvas data-chart="reserve"></canvas></div></div>
+    </div>
+
+    <div class="finding reveal">
+      <div class="txt">
+        <div class="ftag risk">Finding 5 · Opportunity</div>
+        <h3>The endowment is negligible — and the biggest opportunity</h3>
+        <p>The perpetual endowment is ~$210K, about 2% of net assets, so there is no permanent income cushion. Investment return — the only non-contribution revenue — is volatile, swinging to –$496K in 2022. Growing the endowment is the clearest lever to reduce reliance on annual funding cycles.</p>
+        <div class="risk risk-med"><span class="rl">Risk:</span> No permanent income stream, leaving the model exposed to annual funding cycles and investment-market swings. <span class="sev">Medium · flat →</span></div>
+      </div>
+      <div class="chart-card"><div class="chart-title">Endowment ~2% of net assets</div><div class="chart-sub">Perpetual endowment as a share of net assets</div><div class="chart-wrap"><canvas data-chart="endowment"></canvas></div></div>
+    </div>
+
+    <div class="finding rev reveal">
+      <div class="txt">
+        <div class="ftag neutral">Also worth noting</div>
+        <h3>Overhead is rising; the operator is disciplined</h3>
+        <p>Management &amp; general expense grew from $197K (2020) to $930K (2024) — about 4.7x — and fundraising cost per dollar raised rose from ~$0.05 to ~$0.29 as private giving shrank. On the positive side, this is a disciplined operator: clean audit opinions every year, ~80–89% of spending reaching programs, and Charity Navigator 4-star / Candid Platinum recognition.</p>
+        <div class="risk risk-med"><span class="rl">Risk:</span> Overhead growing faster than unrestricted revenue erodes financial flexibility over time. <span class="sev">Medium · worsening ↑</span></div>
+      </div>
+      <div class="chart-card"><div class="chart-title">Overhead rising, cost-per-dollar climbing</div><div class="chart-sub">M&amp;G expense ($K) and cost to raise $1</div><div class="chart-wrap"><canvas data-chart="overhead"></canvas></div></div>
+    </div>
+    <p class="note reveal" style="margin-top:26px"><b>Scope note:</b> the risks above are those evident in the audited financial statements. Operational, compliance, cybersecurity, and governance risks sit outside audited financials and would require a fuller enterprise risk review with internal access.</p>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section id="recs">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Section 4</div>
+      <h2 class="sec">Risk Mitigation &amp; Recommendations</h2>
+      <p class="lead">Each risk identified in Section 3 is paired with a concrete mitigation — how a Finance Director would address it.</p>
+    </div>
+    <div class="tbl-scroll reveal">
+      <table>
+        <thead><tr><th style="width:34%">Risk (from Section 3)</th><th>Mitigation &amp; recommended action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="metric">Over-reliance on one funder.</span> The City has ranged 20–71% of revenue.</td><td>Diversify deliberately — grow major individual gifts and multi-year corporate / foundation grants; set an internal ≤40% ceiling for any single funder; scenario-model a 20–30% City cut with pre-agreed board triggers.</td></tr>
+          <tr><td><span class="metric">Private giving is shrinking.</span> Non-City gifts fell ~65%, $4.7M → $1.7M.</td><td>Make reversing this the top near-term priority — the fastest diversification lever. Strengthen the annual fund and donor retention, and rebuild corporate and foundation pipelines.</td></tr>
+          <tr><td><span class="metric">Thin, flat reserve.</span> Unrestricted liquidity ~$1M against lumpy restricted flows.</td><td>Adopt a board reserve policy scaling toward 3–6 months of core operating expense, replenished from admin-fee revenue in strong years; stand up rolling cash-flow forecasting.</td></tr>
+          <tr><td><span class="metric">Negligible endowment.</span> ~2% of net assets, so no permanent income.</td><td>Launch endowment growth on the existing Epilogue Society planned-giving program, with a disciplined ~4–5% spend policy to preserve purchasing power and generate recurring unrestricted income.</td></tr>
+          <tr><td><span class="metric">Overhead outpacing revenue.</span> M&amp;G up 4.7x; cost to raise $1 up to ~$0.29.</td><td>Cost programs fully so the up-to-15% admin fee covers true overhead; monitor fundraising ROI and the M&amp;G ratio; automate close and reporting to contain administrative cost.</td></tr>
+          <tr><td><span class="metric">2024 drawdown misread as a loss.</span> Net assets $15.7M → $8.6M.</td><td>Not a deficiency — confirm it was the planned deployment of 2022 restricted City grants and communicate that clearly to the board; keep restricted-fund and release tracking tight so timing stays transparent.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2 reveal" style="margin-top:26px">
+      <div class="chart-card"><div class="chart-title">Diversification goal</div><div class="chart-sub">2024 actual vs. an illustrative balanced target</div><div class="chart-wrap"><canvas data-chart="target"></canvas></div></div>
+      <div class="card" style="align-self:stretch">
+        <div class="kicker" style="color:var(--indigo)">Sequencing</div>
+        <p style="margin-top:8px">Protect what's working — the City partnership and the clean-audit record — while building three things in parallel: a real operating reserve, a rebuilt private-giving base, and an endowment engine through the Epilogue Society. That's how a concentrated, lumpy funding model becomes a resilient one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section id="measure">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Section 5</div>
+      <h2 class="sec">How to Measure a Nonprofit's Financial Performance</h2>
+      <p class="lead">Not by the bottom line alone — and, as Charity Navigator, the BBB, and GuideStar argued in retiring the "overhead myth," not by a single overhead ratio either. Three lenses, always read in context: sustainability, efficiency, and risk.</p>
+    </div>
+    <div class="tbl-scroll reveal">
+      <table>
+        <thead><tr><th style="width:26%">Metric</th><th style="width:30%">FY2024 value &amp; formula</th><th>Status</th><th>What it indicates</th></tr></thead>
+        <tbody>
+          <tr class="lensrow"><td colspan="4">Sustainability — can the model sustain the mission?</td></tr>
+          <tr><td class="metric">Operating result (unrestricted)</td><td><span class="num-em">−$106K</span> (≈ breakeven)<span class="formula">= unrestricted revenue − unrestricted expenses = $12.93M − $13.04M</span></td><td><span class="status s-watch">Watch</span></td><td>Near-breakeven operations; the −$7.08M total change is restricted spend-down, not an operating loss. Goal: consistent small surpluses (NFF).</td></tr>
+          <tr><td class="metric">Liquidity / operating reserve</td><td><span class="num-em">~7 months</span> core opex<span class="formula">= board reserve ÷ (core opex ÷ 12) = $845K ÷ ($1.42M ÷ 12); LUNA ≈ $1.0M</span></td><td><span class="status s-watch">Watch</span></td><td>Adequate vs. the org's own costs but flat for five years; under 1 month against total expenses.</td></tr>
+          <tr><td class="metric">Leverage (liabilities ÷ assets)</td><td><span class="num-em">~10%</span><span class="formula">= total liabilities ÷ total assets = $0.94M ÷ $9.56M</span></td><td><span class="status s-healthy">Healthy</span></td><td>Low — no meaningful debt burden (a concern only as it nears 50%).</td></tr>
+          <tr class="lensrow"><td colspan="4">Efficiency — accountability floors, not a verdict</td></tr>
+          <tr><td class="metric">Program &amp; fundraising efficiency</td><td><span class="num-em">89% program; ~$0.27/$1</span><span class="formula">= program ÷ total exp = $11.62M ÷ $13.04M; fundraising ÷ private support = $0.49M ÷ $1.80M</span></td><td><span class="status s-healthy">Healthy</span></td><td>Clears the BBB Wise Giving floors (≥65% program; ≤$0.35 to raise $1) — but a threshold, not a performance verdict.</td></tr>
+          <tr><td class="metric">Endowment / sustainable draw</td><td><span class="num-em">2.5%</span> of net assets (~$9K)<span class="formula">= endowment ÷ net assets = $0.21M ÷ $8.61M; draw ≈ 4.5% × $0.21M</span></td><td><span class="status s-watch">Watch</span></td><td>Minimal permanent cushion; the clearest growth opportunity.</td></tr>
+          <tr class="lensrow"><td colspan="4">Risk — how exposed is the revenue?</td></tr>
+          <tr><td class="metric">Revenue reliability &amp; concentration</td><td><span class="num-em">61%</span> from the City<span class="formula">= largest funder ÷ total revenue = $3.66M ÷ $5.96M</span></td><td><span class="status s-risk">At risk</span></td><td>Contributions and grants ~90%+ of revenue; well above the ~30–40% comfort zone — the top risk.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note reveal" style="margin-top:16px">Methodology grounded in the Nonprofit Finance Fund and Propel Nonprofits financial-health frameworks, the BBB Wise Giving Alliance Standards for Charity Accountability, and UPMIFA endowment guidance — and consistent with the 2013 "Overhead Myth" guidance from Charity Navigator, BBB Wise Giving Alliance, and GuideStar (Candid). Budget-vs-actual variance is also tracked internally, but requires the Foundation's internal budget, which the audited statements don't include.</p>
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section id="revenue">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Section 6</div>
+      <h2 class="sec">Revenue Innovation — From Strong Relationships to Durable Revenue</h2>
+      <p class="lead">SJPLF is <b>not starting from scratch.</b> It already has an enviable base: major technology and foundation supporters including Apple, Adobe, Google, Samsung, Microsoft, Cisco and AMD, alongside Carnegie Corporation and the Silicon Valley Community Foundation; ~2,500 annual donors; a Signature Author Event; and the Epilogue Society. The challenge is not a lack of relationships — it is durability.</p>
+    </div>
+    <p class="lead reveal">Despite that roster, revenue is still ~61% City, private giving has fallen ~65% since 2021, and the endowment sits at ~2% of net assets. So the opportunity is <b>conversion, not acquisition</b>: turning annual, transactional support into multi-year, compounding revenue. Each item below is an option to explore — SJPLF may already have work underway that isn't public.</p>
+    <div class="tbl-scroll reveal">
+      <table>
+        <thead><tr><th style="width:24%">Opportunity</th><th style="width:36%">What peer library foundations do</th><th>SJPLF opportunity &amp; finance angle</th></tr></thead>
+        <tbody>
+          <tr><td class="metric">Convert corporate donors into multi-year commitments</td><td>Peers lock corporate partners into 2–3-year presenting sponsorships with defined deliverables — e.g., Boston's LEGO gift ($1M / 2 yrs); NYPL and Chicago run structured corporate tiers.</td><td>SJPLF already has Apple, Adobe, Google, Samsung, Microsoft, Cisco and AMD as donors. The lever is converting these annual gifts into tiered multi-year sponsorships tied to Digital Empowerment &amp; Workforce programs — turning lumpy support into predictable revenue.</td></tr>
+          <tr><td class="metric">Endowment-building campaign</td><td>Endowment-to-budget runs ~2.5x (Brooklyn) to ~13–20x (Seattle ~$102M); LA ~$66M; Chicago ~$38.5M.</td><td>SJPLF's ~$0.21M endowment is ~0.03x budget. With a strong donor roster and the Epilogue Society already in place, a named endowment campaign converts one-time major gifts into a permanent ~4–5% draw — recurring unrestricted income.</td></tr>
+          <tr><td class="metric">Rebuild &amp; broaden individual giving</td><td>Membership tiers, young-professional groups (NYPL Young Lions, LA Young Literati) and named monthly-sustainer societies ($5–20/mo); Denver membership ~$147K/yr.</td><td>Private giving fell ~65% since 2021. A tiered membership program, a young-professionals group, and a named monthly-sustainer society would rebuild and broaden the individual base — recurring revenue, low launch cost, better retention.</td></tr>
+          <tr><td class="metric">Elevate the signature event</td><td>Major-donor benefits net real money: Boston Literary Lights ~$500K; SF Library Laureates ~$560K.</td><td>Build on the existing Signature Author Event: elevate it toward a major-donor benefit, and measure net proceeds and cost-to-raise-$1, not gross ticket sales.</td></tr>
+          <tr><td class="metric">Earned / enterprise income (pilot)</td><td>Denver Red Chair Bookshop ~$212K/yr; Friends of SFPL used-book ~$0.9M/yr; Philadelphia Culinary Literacy Center (fee classes); venue rental.</td><td>Pilot a used-book / retail line or fee-based maker / culinary classes. Note: peers usually book enterprise income on the City / Friends side — structure carefully and test unit economics before scaling.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card reveal" style="margin-top:24px;border-left:6px solid var(--pink)">
+      <p style="margin-bottom:0;font-size:1.05rem;color:var(--slate)"><i>"You've already built something impressive — Apple, Adobe, Google, and Carnegie all support you. What I'd bring is the finance discipline to make that support durable: multi-year commitments, an endowment that compounds, and a rebuilt individual base, so the model doesn't lean 61% on the City."</i></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h3>SJPLF Strategic Financial Analysis &amp; Risk Assessment</h3>
+    <p style="color:#c7d2fe">An independent review of the San José Public Library Foundation's audited financial statements, FY2020–FY2024 (Chavan &amp; Associates, LLP).</p>
+    <div class="src">
+      <b>Sources:</b> SJPLF audited financial statements FY2020–FY2024; <a href="https://www.sjplf.org/institutional-donors/">SJPLF Institutional Donors</a>, <a href="https://www.sjplf.org/events/">Events</a>, and <a href="https://www.sjplf.org/mission-vision-values/">Mission &amp; Values</a> (sjplf.org). Peer benchmarks from annual reports and IRS Form 990 filings via <a href="https://projects.propublica.org/nonprofits/">ProPublica Nonprofit Explorer</a> (NYPL, Boston, SF, Brooklyn, Denver, Seattle, LA, Chicago). Methodology per Nonprofit Finance Fund, Propel Nonprofits, BBB Wise Giving Alliance, and UPMIFA. Peer dollar figures are indicative; event net proceeds are not always publicly disclosed.
+    </div>
+    <div class="madeby"><b>Prepared by Sorphoan (Jack) Ear</b> — Finance Director candidate · July 4, 2026</div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ---------- data ---------- */
+const YRS=['2020','2021','2022','2023','2024'];
+const D={
+  rev:[5.46,7.30,12.09,6.38,5.96], exp:[2.95,3.56,5.63,6.43,13.04],
+  naW:[4.26,7.83,14.80,14.49,7.51], naU:[1.28,1.45,0.94,1.20,1.10],
+  cityPct:[20,30,71,41,61], priv:[3.90,4.71,3.91,3.00,1.66],
+  reserve:[0.49,0.79,0.67,0.78,0.84], liq:[2.49,1.20,0.91,1.16,1.01],
+  endowPct:[2.0,2.3,1.1,1.2,2.5], endow:[0.11,0.21,0.17,0.19,0.21],
+  mg:[197,305,460,879,930], frCost:[0.05,0.04,0.17,0.10,0.29]
+};
+const C={indigo:'#4f46e5',violet:'#7c3aed',purple:'#8b5cf6',pink:'#ec4899',teal:'#06b6d4',blue:'#3b82f6',emerald:'#10b981',amber:'#f59e0b',red:'#ef4444',slate:'#94a3b8',lilac:'#c4b5fd'};
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+Chart.defaults.color='#64748b';
+Chart.defaults.plugins.legend.labels.usePointStyle=true;
+Chart.register(ChartDataLabels);
+Chart.defaults.set('plugins.datalabels',{display:false});
+const ANIM={duration:2600,easing:'easeOutQuart'};
+
+function grad(ctx,area,c1,c2){
+  if(!area) return c1;
+  const g=ctx.createLinearGradient(0,area.bottom,0,area.top);
+  g.addColorStop(0,c1);g.addColorStop(1,c2);return g;
+}
+const money=v=>'$'+v.toFixed(2)+'M';
+
+const DL_M={display:true,anchor:'end',align:'end',offset:2,clamp:true,formatter:v=>'$'+v+'M',font:{weight:'700',size:9}};
+const BUILD={
+  revexp:(cv)=>new Chart(cv,{type:'bar',data:{labels:YRS,datasets:[
+      {label:'Revenue',data:D.rev,backgroundColor:(c)=>grad(c.chart.ctx,c.chart.chartArea,'#22d3ee','#06b6d4'),borderRadius:6},
+      {label:'Expenses',data:D.exp,backgroundColor:(c)=>grad(c.chart.ctx,c.chart.chartArea,'#818cf8','#4f46e5'),borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,layout:{padding:{top:18}},plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+money(x.raw)}},datalabels:{...DL_M,color:c=>c.datasetIndex===0?'#0e7490':'#3730a3'}},scales:{y:{ticks:{callback:v=>'$'+v+'M'},grid:{color:'#eef2f7'}},x:{grid:{display:false}}}}}),
+  netassets:(cv)=>new Chart(cv,{type:'bar',data:{labels:YRS,datasets:[
+      {label:'With donor restrictions',data:D.naW,backgroundColor:C.lilac,borderRadius:5,stack:'s'},
+      {label:'Unrestricted',data:D.naU,backgroundColor:C.indigo,borderRadius:5,stack:'s'}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+money(x.raw)}},datalabels:{display:c=>c.dataset.data[c.dataIndex]>=0.9,anchor:'center',align:'center',formatter:v=>'$'+v+'M',color:c=>c.datasetIndex===0?'#3730a3':'#fff',font:{weight:'700',size:9}}},scales:{y:{stacked:true,ticks:{callback:v=>'$'+v+'M'},grid:{color:'#eef2f7'}},x:{stacked:true,grid:{display:false}}}}}),
+  netassets2:(cv)=>BUILD.netassets(cv),
+  concentration:(cv)=>new Chart(cv,{type:'bar',data:{labels:YRS,datasets:[{label:'City % of revenue',data:D.cityPct,
+      backgroundColor:D.cityPct.map(v=>v>=60?C.red:C.blue),borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,layout:{padding:{top:16}},plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>x.raw+'% of revenue'}},datalabels:{display:true,anchor:'end',align:'end',offset:2,formatter:v=>v+'%',color:'#1e293b',font:{weight:'800',size:11}}},scales:{y:{max:82,ticks:{callback:v=>v+'%'},grid:{color:'#eef2f7'}},x:{grid:{display:false}}}},
+    plugins:[{id:'ceil',afterDraw:(ch)=>{const y=ch.scales.y.getPixelForValue(40);const{left,right}=ch.chartArea;const cx=ch.ctx;cx.save();cx.strokeStyle=C.emerald;cx.setLineDash([6,5]);cx.lineWidth=1.6;cx.beginPath();cx.moveTo(left,y);cx.lineTo(right,y);cx.stroke();cx.fillStyle=C.emerald;cx.font='600 11px Inter';cx.fillText('40% ceiling',right-72,y-6);cx.restore();}}]}),
+  private:(cv)=>new Chart(cv,{type:'line',data:{labels:YRS,datasets:[{label:'Private giving',data:D.priv,
+      borderColor:C.pink,borderWidth:3,tension:.35,pointBackgroundColor:C.pink,pointRadius:5,
+      fill:true,backgroundColor:(c)=>grad(c.chart.ctx,c.chart.chartArea,'rgba(236,72,153,0.02)','rgba(236,72,153,0.28)')}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>money(x.raw)}},datalabels:{display:true,anchor:'end',align:'top',offset:6,formatter:v=>'$'+v+'M',color:'#be185d',font:{weight:'700',size:10}}},scales:{y:{min:0,max:5.5,ticks:{callback:v=>'$'+v+'M'},grid:{color:'#eef2f7'}},x:{grid:{display:false}}}}}),
+  reserve:(cv)=>new Chart(cv,{type:'bar',data:{labels:YRS,datasets:[
+      {label:'Board reserve',data:D.reserve,backgroundColor:C.blue,borderRadius:5},
+      {label:'Unrestricted liquidity',data:D.liq,backgroundColor:C.slate,borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,layout:{padding:{top:16}},plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+money(x.raw)}},datalabels:{...DL_M,color:'#334155'}},scales:{y:{max:3,ticks:{callback:v=>'$'+v+'M'},grid:{color:'#eef2f7'}},x:{grid:{display:false}}}}}),
+  endowment:(cv)=>new Chart(cv,{type:'bar',data:{labels:YRS,datasets:[{label:'Endowment % of net assets',data:D.endowPct,
+      backgroundColor:(c)=>grad(c.chart.ctx,c.chart.chartArea,'#6ee7b7','#10b981'),borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,layout:{padding:{top:16}},plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>x.raw+'%  ($'+D.endow[x.dataIndex]+'M)'}},datalabels:{display:true,anchor:'end',align:'end',offset:2,formatter:(v,c)=>v+'%  ($'+D.endow[c.dataIndex]+'M)',color:'#065f46',font:{weight:'800',size:9}}},scales:{y:{max:3.2,ticks:{callback:v=>v+'%'},grid:{color:'#eef2f7'}},x:{grid:{display:false}}}}}),
+  overhead:(cv)=>new Chart(cv,{data:{labels:YRS,datasets:[
+      {type:'bar',label:'M&G expense ($K)',data:D.mg,backgroundColor:(c)=>grad(c.chart.ctx,c.chart.chartArea,'#a78bfa','#6d28d9'),borderRadius:6,yAxisID:'y'},
+      {type:'line',label:'Cost to raise $1',data:D.frCost,borderColor:C.red,borderWidth:3,pointBackgroundColor:C.red,pointRadius:5,tension:.3,yAxisID:'y1'}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,layout:{padding:{top:18}},plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.type==='line'?('Cost to raise $1: $'+x.raw.toFixed(2)):('M&G: $'+x.raw+'K')}},datalabels:{display:true,anchor:'end',align:'top',offset:4,clamp:true,formatter:(v,c)=>c.dataset.type==='line'?('$'+v.toFixed(2)):('$'+v+'K'),color:c=>c.dataset.type==='line'?'#b91c1c':'#5b21b6',font:{weight:'700',size:9}}},scales:{y:{position:'left',max:1050,ticks:{callback:v=>'$'+v+'K'},grid:{color:'#eef2f7'}},y1:{position:'right',max:0.35,ticks:{callback:v=>'$'+v.toFixed(2)},grid:{display:false}},x:{grid:{display:false}}}}}),
+  target:(cv)=>new Chart(cv,{type:'bar',data:{labels:['2024 Actual','Illustrative Target'],datasets:[
+      {label:'City of San José',data:[61,40],backgroundColor:C.red,borderRadius:5,stack:'s'},
+      {label:'Private giving',data:[28,40],backgroundColor:C.blue,borderRadius:5,stack:'s'},
+      {label:'Investment / endowment / earned',data:[11,20],backgroundColor:C.emerald,borderRadius:5,stack:'s'}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:ANIM,indexAxis:'x',plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+x.raw+'%'}},datalabels:{display:true,anchor:'center',align:'center',formatter:v=>v+'%',color:'#fff',font:{weight:'800',size:12}}},scales:{y:{stacked:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:'#eef2f7'}},x:{stacked:true,grid:{display:false}}}}})
+};
+
+/* ---------- lazy build charts on scroll ---------- */
+const charts=new WeakMap();
+const chartObs=new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const cv=e.target.querySelector('canvas');
+    if(!cv) return;
+    let ch=charts.get(cv);
+    if(!ch){const key=cv.getAttribute('data-chart');if(BUILD[key]){ch=BUILD[key](cv);if(ch)charts.set(cv,ch);}}
+    else{ch.reset();ch.update();}   /* replay the draw animation on re-entry */
+  });
+},{threshold:.25});
+document.querySelectorAll('.chart-card').forEach(c=>chartObs.observe(c));
+
+/* ---------- reveal on scroll ---------- */
+const revObs=new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{e.target.classList.toggle('visible',e.isIntersecting);});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+/* ---------- count-up stats ---------- */
+function countUp(el){
+  const target=parseFloat(el.getAttribute('data-count'));
+  const suffix=el.getAttribute('data-suffix')||'';
+  const prefix=el.getAttribute('data-prefix')||'';
+  const dur=2400,start=performance.now();
+  function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    const eased=1-Math.pow(1-p,3);
+    const val=Math.round(target*eased);
+    el.textContent=prefix+(val>0&&target<0?'':'')+val+suffix;
+    if(p<1)requestAnimationFrame(tick);else el.textContent=prefix+target+suffix;
+  }
+  requestAnimationFrame(tick);
+}
+const statObs=new IntersectionObserver((ents)=>{
+  ents.forEach(e=>{if(e.isIntersecting)countUp(e.target);});
+},{threshold:.6});
+document.querySelectorAll('.num[data-count]').forEach(el=>statObs.observe(el));
+
+/* ---------- floating books (subtle ambiance) ---------- */
+const BOOK_SVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4c2.6-.7 5.6-.6 8 1 2.4-1.6 5.4-1.7 8-1v14.2c-2.6-.7-5.6-.6-8 1-2.4-1.6-5.4-1.7-8-1V4z"/></svg>';
+function seedBooks(el,count,minS,maxS){
+  if(!el) return;
+  for(let i=0;i<count;i++){
+    const b=document.createElement('span');
+    b.className='book';
+    b.innerHTML=BOOK_SVG;
+    const s=Math.round(minS+Math.random()*(maxS-minS));
+    b.style.left=Math.round(Math.random()*96)+'%';
+    b.style.setProperty('--s',s+'px');
+    b.style.setProperty('--d',(20+Math.random()*22).toFixed(1)+'s');
+    b.style.animationDelay=(-Math.random()*30).toFixed(1)+'s';
+    el.appendChild(b);
+  }
+}
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  seedBooks(document.getElementById('pageBooks'),12,44,88);
+  seedBooks(document.getElementById('heroBooks'),7,54,108);
+}
+
+/* ---------- scroll progress ---------- */
+const bar=document.getElementById('progress');
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const sc=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
+  bar.style.width=(sc*100)+'%';
+  toTop.classList.toggle('show',h.scrollTop>420);
+},{passive:true});
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
