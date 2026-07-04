@@ -103,6 +103,7 @@
   tbody tr:nth-child(even){background:#faf9ff}
   td .metric{font-weight:700}
   td .formula{display:block;font-size:.78rem;color:var(--mute);margin-top:4px;font-style:italic}
+  td .meaning{display:block;font-weight:400;font-size:.82rem;color:var(--mute);margin-top:5px;font-style:italic;line-height:1.45}
   .lensrow td{background:linear-gradient(120deg,#eef2ff,#faf5ff)!important;font-weight:800;color:var(--indigo);font-size:.8rem;letter-spacing:.03em;text-transform:uppercase}
   .status{display:inline-block;font-weight:800;font-size:.76rem;padding:4px 12px;border-radius:999px;white-space:nowrap}
   .s-healthy{background:#dcfce7;color:#15803d}
@@ -347,20 +348,21 @@
       <div class="kicker">Section 5</div>
       <h2 class="sec">How to Measure a Nonprofit's Financial Performance</h2>
       <p class="lead">Not by the bottom line alone — and, as Charity Navigator, the BBB, and GuideStar argued in retiring the "overhead myth," not by a single overhead ratio either. Three lenses, always read in context: sustainability, efficiency, and risk.</p>
+      <p class="lead">Each measure below shows what it means in plain terms, SJPLF's FY2024 result and formula, a status, and what it signals.</p>
     </div>
     <div class="tbl-scroll reveal">
       <table>
-        <thead><tr><th style="width:26%">Metric</th><th style="width:30%">FY2024 value &amp; formula</th><th>Status</th><th>What it indicates</th></tr></thead>
+        <thead><tr><th style="width:30%">Metric &amp; what it measures</th><th style="width:26%">FY2024 value &amp; formula</th><th>Status</th><th>What it indicates</th></tr></thead>
         <tbody>
-          <tr class="lensrow"><td colspan="4">Sustainability — can the model sustain the mission?</td></tr>
-          <tr><td class="metric">Operating result (unrestricted)</td><td><span class="num-em">−$106K</span> (≈ breakeven)<span class="formula">= unrestricted revenue − unrestricted expenses = $12.93M − $13.04M</span></td><td><span class="status s-watch">Watch</span></td><td>Near-breakeven operations; the −$7.08M total change is restricted spend-down, not an operating loss. Goal: consistent small surpluses (NFF).</td></tr>
-          <tr><td class="metric">Liquidity / operating reserve</td><td><span class="num-em">~7 months</span> core opex<span class="formula">= board reserve ÷ (core opex ÷ 12) = $845K ÷ ($1.42M ÷ 12); LUNA ≈ $1.0M</span></td><td><span class="status s-watch">Watch</span></td><td>Adequate vs. the org's own costs but flat for five years; under 1 month against total expenses.</td></tr>
-          <tr><td class="metric">Leverage (liabilities ÷ assets)</td><td><span class="num-em">~10%</span><span class="formula">= total liabilities ÷ total assets = $0.94M ÷ $9.56M</span></td><td><span class="status s-healthy">Healthy</span></td><td>Low — no meaningful debt burden (a concern only as it nears 50%).</td></tr>
-          <tr class="lensrow"><td colspan="4">Efficiency — accountability floors, not a verdict</td></tr>
-          <tr><td class="metric">Program &amp; fundraising efficiency</td><td><span class="num-em">89% program; ~$0.27/$1</span><span class="formula">= program ÷ total exp = $11.62M ÷ $13.04M; fundraising ÷ private support = $0.49M ÷ $1.80M</span></td><td><span class="status s-healthy">Healthy</span></td><td>Clears the BBB Wise Giving floors (≥65% program; ≤$0.35 to raise $1) — but a threshold, not a performance verdict.</td></tr>
-          <tr><td class="metric">Endowment / sustainable draw</td><td><span class="num-em">2.5%</span> of net assets (~$9K)<span class="formula">= endowment ÷ net assets = $0.21M ÷ $8.61M; draw ≈ 4.5% × $0.21M</span></td><td><span class="status s-watch">Watch</span></td><td>Minimal permanent cushion; the clearest growth opportunity.</td></tr>
-          <tr class="lensrow"><td colspan="4">Risk — how exposed is the revenue?</td></tr>
-          <tr><td class="metric">Revenue reliability &amp; concentration</td><td><span class="num-em">61%</span> from the City<span class="formula">= largest funder ÷ total revenue = $3.66M ÷ $5.96M</span></td><td><span class="status s-risk">At risk</span></td><td>Contributions and grants ~90%+ of revenue; well above the ~30–40% comfort zone — the top risk.</td></tr>
+          <tr class="lensrow"><td colspan="4">Lens 1 — Sustainability: can it survive over time?</td></tr>
+          <tr><td class="metric">Operating result (unrestricted)<span class="meaning">Did it run a surplus or deficit? Consistent small surpluses = a sustainable model (per the Nonprofit Finance Fund).</span></td><td><span class="num-em">−$106K</span> (≈ breakeven)<span class="formula">= unrestricted revenue − unrestricted expenses = $12.93M − $13.04M</span></td><td><span class="status s-watch">Watch</span></td><td>Near-breakeven operations; the −$7.08M total change is restricted spend-down, not an operating loss.</td></tr>
+          <tr><td class="metric">Liquidity / operating reserve<span class="meaning">How many months of expenses it could cover if income stopped; healthy target is 3–6 months. (LUNA = liquid unrestricted net assets, the truly spendable cushion.)</span></td><td><span class="num-em">~7 months</span> core opex<span class="formula">= board reserve ÷ (core opex ÷ 12) = $845K ÷ ($1.42M ÷ 12); LUNA ≈ $1.0M</span></td><td><span class="status s-watch">Watch</span></td><td>Adequate vs. the org's own costs but flat for five years; under 1 month against total expenses.</td></tr>
+          <tr><td class="metric">Leverage (liabilities ÷ assets)<span class="meaning">Is it covering its true costs, not drowning in debt?</span></td><td><span class="num-em">~10%</span><span class="formula">= total liabilities ÷ total assets = $0.94M ÷ $9.56M</span></td><td><span class="status s-healthy">Healthy</span></td><td>Low — no meaningful debt burden (a concern only as it nears 50%).</td></tr>
+          <tr class="lensrow"><td colspan="4">Lens 2 — Efficiency: is money used well?</td></tr>
+          <tr><td class="metric">Program &amp; fundraising efficiency<span class="meaning">How much of each dollar reaches the mission, and the cost to raise a dollar. BBB floors (≥65% to program; ≤$0.35 to raise $1) are thresholds, not a verdict.</span></td><td><span class="num-em">89% program; ~$0.27/$1</span><span class="formula">= program ÷ total exp = $11.62M ÷ $13.04M; fundraising ÷ private support = $0.49M ÷ $1.80M</span></td><td><span class="status s-healthy">Healthy</span></td><td>Clears both BBB floors comfortably.</td></tr>
+          <tr><td class="metric">Endowment / sustainable draw<span class="meaning">If there's an endowment, is the drawdown sustainable (~4–5%, per the UPMIFA spending law)?</span></td><td><span class="num-em">2.5%</span> of net assets (~$9K)<span class="formula">= endowment ÷ net assets = $0.21M ÷ $8.61M; draw ≈ 4.5% × $0.21M</span></td><td><span class="status s-watch">Watch</span></td><td>Minimal permanent cushion; the clearest growth opportunity.</td></tr>
+          <tr class="lensrow"><td colspan="4">Lens 3 — Risk: what could break it?</td></tr>
+          <tr><td class="metric">Revenue reliability &amp; concentration<span class="meaning">How dependent is it on any single funder?</span></td><td><span class="num-em">61%</span> from the City<span class="formula">= largest funder ÷ total revenue = $3.66M ÷ $5.96M</span></td><td><span class="status s-risk">At risk</span></td><td>Contributions and grants ~90%+ of revenue; well above the ~30–40% comfort zone — the top risk.</td></tr>
         </tbody>
       </table>
     </div>
